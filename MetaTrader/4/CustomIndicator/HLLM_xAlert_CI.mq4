@@ -42,14 +42,15 @@ int start() {
    for (int i=0; i<limit; i++) {
       if (crossOver(i)) {
          buffer[i] = Close[i];
+
+         // when real time
+         if (limit == 1) {
+            Alert("HighLowLine+MA is crossed");
+         }
       } else {
          buffer[i] = EMPTY_VALUE;
       }
 
-      // when real time
-      if (limit == 1) {
-         Alert("HighLowLine+MA is crossed");
-      }
    }
 
    return(0);
