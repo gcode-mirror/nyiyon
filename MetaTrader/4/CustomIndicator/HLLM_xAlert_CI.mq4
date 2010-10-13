@@ -24,13 +24,13 @@ int init() {
 
    SetIndexBuffer(0, buffer);
 
-   ArrayInitialize(0, EMPTY_VALUE);
-
 	return(0);
 }
 
 //+------------------------------------------------------------------+
 int deinit() {
+
+   ArrayInitialize(buffer, EMPTY_VALUE);
 
     return(0);
 }
@@ -38,17 +38,20 @@ int deinit() {
 //+------------------------------------------------------------------+
 int start() {
    int limit = MathMin(Bars - IndicatorCounted(), Bars - MathMax(ExtMAPeriod, ExtHighLowPeriod));
+   static datetime lastTime;
 
    for (int i=0; i<limit; i++) {
       if (crossOver(i)) {
          buffer[i] = Close[i];
 
          // when real time
-         if (limit == 1) {
+         if (limit == 1 && lastTime != Time[0]) {
+            lastTime = Time[0];
             Alert("HighLowLine+MA is crossed");
          }
       } else {
          buffer[i] = EMPTY_VALUE;
+         lastTime = EMPTY;
       }
 
    }

@@ -31,11 +31,17 @@ int init() {
    SetIndexBuffer(1, bufferHigh);
    SetIndexBuffer(2, bufferLow);
 
+	return(0);
+}
+
+//+------------------------------------------------------------------+
+int deinit() {
+
    ArrayInitialize(bufferMA, EMPTY_VALUE);
    ArrayInitialize(bufferHigh, EMPTY_VALUE);
    ArrayInitialize(bufferLow, EMPTY_VALUE);
-   
-	return(0);
+
+   return(0);
 }
 
 //+------------------------------------------------------------------+
